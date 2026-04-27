@@ -1,14 +1,12 @@
-import { getEmployeeById } from '../../data/employees'
-import './EmployeeDetail.css'
+import { getEmployeeById } from "../../data/employees";
+import { useNavigate, useParams } from "react-router-dom";
+import "./EmployeeDetail.css";
 
-// Note pour l'étudiant : Dans le chapitre 2, vous utiliserez useParams()
-// pour récupérer l'ID depuis l'URL. Pour l'instant, on affiche l'employé avec l'id 1.
 function EmployeeDetail() {
-  // Dans le chapitre 2, cette ligne sera remplacée par :
-  // const { id } = useParams()
-  const id = 1
+  const { id } = useParams();
+  const navigate = useNavigate();
 
-  const employee = getEmployeeById(parseInt(id))
+  const employee = getEmployeeById(parseInt(id));
 
   if (!employee) {
     return (
@@ -18,11 +16,14 @@ function EmployeeDetail() {
           <p>L'employé demandé n'existe pas.</p>
         </div>
       </div>
-    )
+    );
   }
 
   return (
     <div className="page">
+      <button onClick={() => navigate("/employees")} className="back-button">
+        ← Retour à la liste
+      </button>
       <div className="employee-detail">
         <div className="employee-detail-header">
           <img
@@ -68,7 +69,7 @@ function EmployeeDetail() {
         </div>
       </div>
     </div>
-  )
+  );
 }
 
-export default EmployeeDetail
+export default EmployeeDetail;
